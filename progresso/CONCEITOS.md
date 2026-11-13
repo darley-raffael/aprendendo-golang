@@ -6,10 +6,10 @@
 
 | Conceito | Fase | Nível | Acertos seguidos | Última revisão | Próxima revisão | Notas |
 |---|---|---|---|---|---|---|
-| `toolchain-go` | 0 | 0 | 0 | - | - | |
-| `modules-e-go-mod` | 0 | 0 | 0 | - | - | |
-| `pacotes-e-visibilidade` | 0 | 0 | 0 | - | - | |
-| `fmt-verbos` | 0 | 0 | 0 | - | - | |
+| `toolchain-go` | 0 | 3 | 0 | 2026-11-13 | 2026-11-20 | M01 aprovado sem dicas |
+| `modules-e-go-mod` | 0 | 2 | 0 | 2026-11-13 | 2026-11-16 | M01: caminho do módulo só corrigido após review |
+| `pacotes-e-visibilidade` | 0 | 2 | 0 | 2026-11-13 | 2026-11-16 | checagem parcial: confundiu pacote x módulo; import sem caminho do módulo; esqueceu campo minúsculo; M01: doc comment só após 2 reviews |
+| `fmt-verbos` | 0 | 1 | 0 | 2026-11-13 | 2026-11-14 | M01 só usou Println; verbos ainda não aplicados (M02 aplica) |
 | `variaveis-e-zero-values` | 0 | 0 | 0 | - | - | |
 | `tipos-basicos` | 0 | 0 | 0 | - | - | |
 | `conversao-de-tipos-explicita` | 0 | 0 | 0 | - | - | |

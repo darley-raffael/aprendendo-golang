@@ -3,21 +3,21 @@
 ## Agora
 
 - **Fase atual:** 0, Primeiros passos (rampa de fundamentos)
-- **Projeto/etapa atual:** M01 `ola`
-- **Status:** não iniciado
-- **Próxima ação:** rodar `/sessao` e depois `/desafio` para receber o M01
-- **Última sessão:** -
+- **Projeto/etapa atual:** M02 `conversor`
+- **Status:** não iniciado (M01 aprovado em 2026-11-13)
+- **Próxima ação:** `/desafio` do M02 `conversor`
+- **Última sessão:** 2026-11-13
 
 ## Métricas
 
 | Sessões | Horas | Projetos aprovados | Katas | Dicas usadas (N1/N2/N3) |
 |---|---|---|---|---|
-| 0 | 0 | 0 | 0 | 0/0/0 |
+| 1 | 1 | 0 (M01 aprovado) | 0 | 0/0/0 |
 
 ## Fases
 
 - [ ] **Fase 0: Primeiros passos (rampa de fundamentos)**
-  - [ ] M01 `ola` · [ ] M02 `conversor` · [ ] M03 `adivinha`
+  - [x] M01 `ola` · [ ] M02 `conversor` · [ ] M03 `adivinha`
   - [ ] M04 `boletim` · [ ] M05 `agenda` · [ ] M06 `senha`
   - [ ] Diagnóstico da rampa
   - [ ] P00 `gowc` (3 etapas)

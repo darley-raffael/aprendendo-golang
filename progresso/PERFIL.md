@@ -17,3 +17,4 @@
 
 <!-- Padrões notados ao longo do tempo: pontos fortes, dificuldades recorrentes, hábitos de TS/Node que aparecem no código Go. -->
 - Atenção a hábitos de TS/Node que costumam aparecer: tratar erro como exceção, estruturas no estilo NestJS (DI container, pastas por camada), excesso de abstração/genéricos, assumir execução single-thread (races).
+- 2026-11-13 (M01): tende a responder perguntas pela metade (pula subitens) e a tratar doc comment como formalidade; código limpo e boa separação de responsabilidades desde o início. Pedir respostas a todos os subitens.
