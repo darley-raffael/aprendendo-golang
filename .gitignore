@@ -1,0 +1,25 @@
+# binários e builds
+bin/
+dist/
+target/
+build/
+*.exe
+*.out
+*.test
+coverage.*
+
+# deps
+node_modules/
+vendor/
+
+# editor/SO
+.idea/
+.vscode/
+.DS_Store
+
+# env
+.env
+.env.*
+
+# claude local
+.claude/settings.local.json
