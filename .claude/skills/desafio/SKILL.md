@@ -9,7 +9,11 @@ description: Apresenta o próximo projeto ou a próxima etapa do roadmap. Faz um
 
 - Leia `ROADMAP.md`, `progresso/PROGRESSO.md` e `progresso/PERFIL.md`.
 - Se houver etapa com review 🔁 pendente, **não avance**: lembre o aluno do que falta refatorar.
-- Identifique a próxima etapa (ou o próximo projeto, criando a pasta `projetos/NN-nome/`).
+- Identifique o próximo item na ordem do roadmap: **micro-projeto da rampa → diagnóstico → etapa de projeto**.
+  - **Micro-projeto** (`projetos/NN-rampa/MNN-nome/` ou `RN.x-nome/`): uma sessão, um `DESAFIO.md` enxuto (o quê + exemplos de entrada/saída + critérios). Aplique o **andaime decrescente** de `METODOLOGIA.md`: nos primeiros, crie você mesmo o arquivo de testes (que compila e falha) e diga quais arquivos e funções criar; nos do meio, forneça testes parciais; nos últimos, só o enunciado.
+  - **Diagnóstico** (ao terminar a rampa): siga a seção "Diagnóstico da rampa" de `METODOLOGIA.md` **antes** de liberar o projeto grande. Se houver reforço, use `/kata` e só depois avance.
+  - **Etapa de projeto**: crie a pasta `projetos/NN-nome/` se for a primeira etapa.
+- Na mini-aula de um projeto, os conceitos de **Aprofunda** ganham um "agora mais fundo": 2–4 linhas ligando o que o aluno já sabe ao aspecto novo (ex.: "você já usou slices; agora vamos ver por que `append` às vezes altera outro slice").
 
 ## 2. Mini-aula dos conceitos novos (só os desta etapa)
 

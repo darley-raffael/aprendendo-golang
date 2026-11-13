@@ -10,20 +10,46 @@ Aprendizado **orientado a projetos**, com **conceitos introduzidos just-in-time*
 4. **Idiomático > funcional.** Uma entrega só é aprovada quando segue as convenções da comunidade da tecnologia.
 5. **Recuperação ativa e espaçada.** Revisar puxando da memória (quiz, prever saída, achar bug) em intervalos crescentes vence reler.
 6. **Progresso visível.** Tudo é registrado em arquivos versionados: dá para ver a evolução e retomar de qualquer máquina.
+7. **Rampa antes do projeto.** Toda fase começa com **micro-projetos** pequenos (uma sessão cada) que isolam 1–4 conceitos novos. O projeto grande vem depois e **combina** o que a rampa ensinou num problema real. Nunca jogue o aluno num projeto que exige muitos conceitos inéditos de uma vez.
+8. **Introduz → aprofunda.** Um tema aparece primeiro no básico e volta mais fundo em fases seguintes (ex.: "listas básicas" → "internals de memória" → "otimização de alocação"). Cada projeto declara o que **introduz** e o que **aprofunda**.
+9. **Andaime decrescente.** No início, o tutor fornece testes e estrutura; o suporte diminui gradualmente até o aluno conduzir tudo sozinho.
 
 ## Estrutura do roadmap
 
 ```
 Fase
  ├── Objetivo e critério de saída (checkpoint)
- ├── Projetos (2–3 por fase, cada um dividido em ETAPAS entregáveis)
- │    ├── Conceitos novos (introduzidos no /desafio)
+ ├── Rampa: 2–6 micro-projetos (1 sessão cada, 1–4 conceitos novos cada)
+ │    └── Diagnóstico da rampa → reforço se necessário
+ ├── Projetos (1–3 por fase, cada um dividido em ETAPAS entregáveis)
+ │    ├── Conceitos introduzidos (só o que a rampa não cobriu)
+ │    ├── Conceitos aprofundados (vistos antes, agora mais fundo)
  │    ├── Requisitos MVP + extensões opcionais
  │    └── Critérios de aceite (o que o /review verifica)
  └── Katas (exercícios curtos de 20–40 min)
 ```
 
 Projetos são **divididos em etapas** de 1 a 3 sessões cada. Cada etapa termina em algo que roda e passa num `/review`. Isso mantém o ritmo mesmo com pouco tempo semanal.
+
+## Rampa, andaime e diagnóstico
+
+**Micro-projeto ≠ kata.** A kata é um exercício de reforço sobre conceitos já vistos. O micro-projeto é um **programa pequeno e completo** (roda, tem entrada e saída) que **introduz** conceitos novos com o mínimo de distração.
+
+**Andaime decrescente** (principalmente na primeira fase, quando a linguagem é toda nova):
+
+| Momento | Testes | Estrutura |
+|---|---|---|
+| Primeiros micro-projetos | o tutor fornece todos | o tutor diz quais arquivos e funções criar |
+| Micro-projetos do meio | o tutor fornece parte; o aluno completa as bordas | o aluno decide, o tutor revisa |
+| Últimos micro-projetos e projetos | o aluno escreve todos | o aluno decide |
+
+Nas fases seguintes, a rampa já começa no nível "o aluno escreve os testes", salvo quando o tema é muito novo (ex.: concorrência, rede).
+
+**Diagnóstico da rampa** (ao final de cada rampa, ~10 min):
+1. 3–5 perguntas cobrindo os conceitos da rampa (no formato da revisão espaçada).
+2. Análise do diário: quantas dicas, e de que nível, em cada conceito; itens 🟡 recorrentes nos reviews.
+3. Resultado registrado em "Observações do tutor" no `PERFIL.md`.
+4. Conceito abaixo do nível 2 → **reforço** (1 kata ou micro-projeto extra) antes do projeto grande. Rampa muito fácil → seguir direto e considerar uma extensão do projeto.
 
 ## Ciclo de uma sessão (60–90 min)
 
@@ -99,10 +125,16 @@ Cada fase em `ROADMAP.md` segue:
 **Objetivo:** …
 **Checkpoint de saída:** …
 
+### Rampa
+- **RN.1 `micro-projeto`:** o que construir em 1 sessão (`conceito-a`, `conceito-b`)
+- **RN.2 `micro-projeto`:** … (`conceito-c`)
+- **Diagnóstico** → PN
+
 ### PN. nome-do-projeto: descrição curta
 - **Por quê:** o que esse projeto ensina e por que nesta ordem
 - **Etapas:** 1) … 2) … 3) …
-- **Conceitos introduzidos:** `conceito-a`, `conceito-b`, …
+- **Conceitos introduzidos:** `conceito-a`, `conceito-b`, … (inclui os da rampa; é a lista que gera o CONCEITOS.md)
+- **Aprofunda:** `conceito-de-fase-anterior`, …
 - **Critérios de aceite:** …
 - **Extensões (opcional):** …
 - **Ponte com sua stack:** comparações e armadilhas

@@ -31,7 +31,11 @@ Pergunte apenas o que ainda não se sabe:
 Siga **exatamente** o formato descrito em `METODOLOGIA.md` ("Formato do roadmap"). Requisitos de qualidade:
 
 - **Completo e não superficial:** do zero até nível de produção/mercado. Inclua os tópicos avançados que um profissional sênior da tecnologia domina (internals, performance, concorrência, tooling, testes, deploy, ecossistema).
-- **Progressão real:** cada projeto usa o que veio antes e adiciona 3–8 conceitos novos. Nada de conceito sem projeto que o use.
+- **Progressão real e gradual:**
+  - **Fase 0 é sempre uma rampa de fundamentos:** 4–6 micro-projetos de uma sessão (1–4 conceitos básicos cada, com andaime decrescente de testes), depois o diagnóstico, e só então um projeto de consolidação pequeno.
+  - **Toda fase seguinte abre com uma rampa** de 2–3 micro-projetos que isolam os conceitos novos mais difíceis, seguida de diagnóstico, antes do projeto grande.
+  - Cada projeto adiciona no máximo ~6 conceitos inéditos além dos da rampa e declara **Aprofunda:** com conceitos de fases anteriores, revisitados mais fundo.
+  - Nenhum conceito é citado (rampa, kata, aprofunda) antes da fase em que é introduzido. Nada de conceito sem projeto que o use.
 - **Projetos com cara de mundo real**, ligados aos objetivos e domínios do aluno. Cada projeto dividido em **etapas** de 1–3 sessões.
 - **Katas** por fase, ligadas aos conceitos da fase.
 - **Ponte com a stack do aluno** em todo projeto: equivalências e, principalmente, **armadilhas** de trazer hábitos antigos.

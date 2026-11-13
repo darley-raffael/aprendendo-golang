@@ -9,7 +9,7 @@ Roadmap completo em [`ROADMAP.md`](ROADMAP.md). Progresso em [`progresso/PROGRES
 
 | Fase | Tema | Projetos |
 |---|---|---|
-| 0 | Toolchain e primeiro contato | `gowc` |
+| 0 | Primeiros passos (6 micro-projetos) | `ola` → `senha`, depois `gowc` |
 | 1 | Fundamentos pela CLI | `tarefas`, `logstat` |
 | 2 | Sistema de tipos e design idiomático | `calc` (interpretador) |
 | 3 | Concorrência | `linkcheck`, `thumbs` |
@@ -19,6 +19,8 @@ Roadmap completo em [`ROADMAP.md`](ROADMAP.md). Progresso em [`progresso/PROGRES
 | 7 | Microsserviços e observabilidade | `encurta` v3 |
 | 8 | Performance e internals | otimizar `minikv` |
 | 9 | Carreira | capstone, entrevistas, open source |
+
+Toda fase abre com uma **rampa** de micro-projetos que isolam os conceitos novos, seguida de um diagnóstico, e só depois vem o projeto grande.
 
 ## Como estudo
 

@@ -8,38 +8,85 @@
 
 | Fase | Tema | Projetos | Semanas* |
 |---|---|---|---|
-| 0 | Toolchain e primeiro contato | P00 `gowc` | 1 |
-| 1 | Fundamentos pela linha de comando | P01 `tarefas`, P02 `logstat` | 4 |
-| 2 | Sistema de tipos e design idiomático | P03 `calc` | 4 |
-| 3 | Concorrência | P04 `linkcheck`, P05 `thumbs` | 5 |
-| 4 | Backend HTTP e persistência | P06 `encurta` (API), P07 `encurta` (Postgres + Docker) | 6 |
-| 5 | CLIs profissionais e ferramentas DevOps | P08 `devkit` | 4 |
-| 6 | Redes e sistemas distribuídos | P09 `minikv` (mini Redis) | 6 |
-| 7 | Microsserviços e observabilidade | P10 `encurta` distribuído | 6 |
-| 8 | Performance, internals e produção | P11 otimizar `minikv` | 3 |
+| 0 | Primeiros passos: rampa de fundamentos | M01–M06 (micro) → diagnóstico → P00 `gowc` | 3 |
+| 1 | Fundamentos pela linha de comando | rampa + P01 `tarefas`, P02 `logstat` | 5 |
+| 2 | Sistema de tipos e design idiomático | rampa + P03 `calc` | 5 |
+| 3 | Concorrência | rampa + P04 `linkcheck`, P05 `thumbs` | 6 |
+| 4 | Backend HTTP e persistência | rampa + P06 `encurta` (API), P07 `encurta` (Postgres + Docker) | 7 |
+| 5 | CLIs profissionais e ferramentas DevOps | rampa + P08 `devkit` | 5 |
+| 6 | Redes e sistemas distribuídos | rampa + P09 `minikv` (mini Redis) | 7 |
+| 7 | Microsserviços e observabilidade | rampa + P10 `encurta` distribuído | 7 |
+| 8 | Performance, internals e produção | rampa + P11 otimizar `minikv` | 4 |
 | 9 | Carreira e mercado | P12 capstone + entrevistas + open source | 3 + contínuo |
 
-\* A ~5h/semana (≈ 3 sessões de 90 min). **Total ≈ 42 semanas (~10 meses).** Semana corrida: troque a sessão por um `/kata`; o plano absorve isso.
+\* A ~5h/semana (≈ 3 sessões de 90 min). **Total ≈ 52 semanas (~12 meses).** Semana corrida: troque a sessão por um `/kata`; o plano absorve isso. Se a rampa de uma fase sair fácil, o diagnóstico libera você direto para o projeto e o prazo encolhe.
+
+**Como a progressão funciona:**
+- **Rampa → projeto.** Toda fase abre com **micro-projetos** (uma sessão cada, ~30–60 min) que isolam os conceitos novos, um ou dois por vez. Só depois vem o projeto grande, que **combina** esses conceitos num problema real.
+- **Diagnóstico ao fim da rampa.** 3–5 perguntas + análise das dicas usadas. Se uma área estiver fraca, entra um reforço (kata ou micro-projeto extra) **antes** do projeto grande.
+- **Introduz → aprofunda.** Cada projeto lista os conceitos que **introduz** e os que **aprofunda**. O mesmo tema volta mais fundo depois (ex.: `slices-basico` na fase 0 → `slices-internals-len-cap` na fase 1 → `escape-analysis` na fase 8).
+- **Andaime decrescente.** Nas primeiras micro-projetos o tutor fornece os testes; aos poucos você passa a completá-los e, a partir do P00, escreve todos.
 
 **Fio condutor:** a trilha alterna CLI → concorrência → backend → DevOps → distribuído, e alguns projetos **evoluem** ao longo das fases (o `encurta` nasce como monolito na fase 4 e vira microsserviços na fase 7; o `minikv` nasce na fase 6 e é otimizado na fase 8). Assim você sente na prática o custo e o benefício de cada decisão.
 
 ---
 
-## Fase 0: Toolchain e primeiro contato (~1 semana)
+## Fase 0: Primeiros passos, rampa de fundamentos (~3 semanas)
 
-**Objetivo:** sentir-se em casa com o ciclo editar → rodar → testar e com a filosofia "a ferramenta decide o estilo".
-**Checkpoint de saída:** explicar a diferença entre módulo e pacote, o que `go build`/`go run`/`go vet`/`gofmt` fazem e por que Go não tem `while`, `try/catch` nem `class`.
+**Objetivo:** fixar a sintaxe e os fundamentos de Go em passos pequenos, **um punhado de conceitos por vez**, e descobrir cedo quais áreas precisam de reforço.
+**Checkpoint de saída:** explicar a diferença entre módulo e pacote, o que `go build`/`go run`/`go vet`/`gofmt` fazem, zero values, por que erro é valor, e por que Go não tem `while`, `try/catch` nem `class`.
 
-### P00. gowc: clone do `wc` do Unix
-- **Por quê:** é um programa pequeno, mas toca em I/O, argumentos, erros e saída formatada. Mostra de cara como Go trata erros e strings/bytes.
+### Rampa: micro-projetos (uma sessão cada)
+
+Cada micro-projeto vive em `projetos/00-rampa/MNN-nome/` e passa por um `/review` curto. Nas micro-projetos M01–M03 os testes são do tutor; M04–M05 vêm com testes parciais para você completar; no M06 você escreve todos.
+
+#### M01. ola: seu primeiro programa
+- **O quê:** `ola Maria` → `Olá, Maria!`; sem argumento → `Olá, mundo!`. Gerar o binário e rodá-lo.
+- **Conceitos introduzidos:** `toolchain-go`, `modules-e-go-mod`, `pacotes-e-visibilidade`, `fmt-verbos`
+- **Ponte com TS:** `go.mod` ≈ `package.json`, sem `node_modules` e sem scripts. `go run` ≈ `ts-node`; `go build` gera **um binário nativo**. Letra maiúscula = `export`.
+
+#### M02. conversor: conversor de unidades
+- **O quê:** `conversor 100 c f` → `212.00 °F` (temperatura, distância, peso). Entrada inválida → mensagem clara e exit code ≠ 0.
+- **Conceitos introduzidos:** `variaveis-e-zero-values`, `tipos-basicos`, `conversao-de-tipos-explicita`, `constantes`, `strconv`, `erros-como-valores`, `if-com-init`
+- **Ponte com TS:** não existe `number`: `int` e `float64` não se misturam sem conversão explícita. `strconv.Atoi` devolve `(valor, err)` em vez de `NaN` ou exceção. Não há `undefined`: toda variável nasce com **zero value**.
+
+#### M03. adivinha: jogo de adivinhar o número
+- **O quê:** o programa sorteia de 1 a 100 e lê palpites do stdin, respondendo "maior" ou "menor" até acertar; mostra o número de tentativas e oferece jogar de novo.
+- **Conceitos introduzidos:** `for-unico-loop`, `switch`, `funcoes-multiplos-retornos`, `bufio-scanner`, `math-rand`
+- **Ponte com TS:** `for` é o único loop (faz o papel de `while` e `for...of`). `switch` não precisa de `break` (não "cai" para o próximo caso) e pode não ter expressão (vira um `if/else` encadeado).
+
+#### M04. boletim: estatísticas de notas
+- **O quê:** recebe notas por argumento ou stdin e mostra média, mediana, maior, menor e situação (aprovado, recuperação, reprovado). Lógica em funções puras, separadas do `main`.
+- **Conceitos introduzidos:** `slices-basico`, `range`, `funcoes-variadicas`, `testing-basico`
+- **Testes:** parciais do tutor; você adiciona os casos de borda (lista vazia, nota única, número par de notas).
+- **Ponte com TS:** slice ≈ array dinâmico, mas sem `.map`/`.filter` embutidos: você escreve o loop (e é idiomático). `go test` já vem na toolchain, sem Jest.
+
+#### M05. agenda: contatos em memória
+- **O quê:** um REPL simples (`add`, `find`, `list`, `rm`) com contatos (nome, telefone, email) guardados em memória, com busca por nome.
+- **Conceitos introduzidos:** `maps-basico`, `structs-basico`, `metodos-intro`, `ponteiros-basico`, `table-driven-tests`
+- **Testes:** parciais do tutor no formato table-driven; você completa.
+- **Ponte com TS:** struct é **valor**: passar para uma função **copia** (diferente de objeto em JS). Ponteiro é a forma explícita de compartilhar. Mapa ≈ `Map`, mas a leitura de chave inexistente retorna o zero value (use `v, ok := m[k]`).
+
+#### M06. senha: gerador e validador de senhas
+- **O quê:** `senha gerar -n 16 --simbolos` e `senha validar "abc"` (regras: tamanho, maiúscula, dígito, símbolo; relatório do que falta). Flags com valores padrão e `-h`.
+- **Conceitos introduzidos:** `os-args-e-flag`, `pacote-strings`, `runes-e-utf8`, `crypto-rand`
+- **Testes:** todos seus.
+- **Ponte com TS:** string em Go é uma sequência de **bytes** (UTF-8), não de caracteres: `len("ação")` é 5. `range` numa string itera **runes**.
+
+### Diagnóstico da rampa
+Antes do P00, o tutor faz 5 perguntas cobrindo M01–M06 e analisa as dicas e os reviews da rampa. O resultado vai para "Observações do tutor" no `PERFIL.md`. Se um conceito ficou abaixo do nível 2, entra **1 kata de reforço** antes de seguir.
+
+### P00. gowc: clone do `wc` do Unix (projeto de consolidação)
+- **Por quê:** junta tudo da rampa num programa de verdade e acrescenta leitura de arquivos e streams.
 - **Etapas:**
   1. `gowc arquivo.txt` imprime linhas, palavras e bytes.
   2. Flags `-l -w -c -m` (runes), vários arquivos com total, leitura de stdin quando não há arquivo.
-  3. Testes table-driven das funções de contagem.
-- **Conceitos introduzidos:** `modules-e-go-mod`, `pacotes-e-visibilidade`, `toolchain-go`, `variaveis-e-zero-values`, `tipos-basicos`, `for-unico-loop`, `if-com-init`, `erros-como-valores`, `os-args-e-flag`, `bufio-scanner`, `fmt-verbos`, `testing-basico`
-- **Critérios de aceite:** `gofmt -l .` vazio; `go vet ./...` limpo; testes para arquivo vazio, sem newline final e UTF-8 (`-m` ≠ `-c` para "ação").
+  3. Testes table-driven das funções de contagem, escritos por você.
+- **Conceitos introduzidos:** `os-open-e-arquivos`, `defer`, `io-reader-intro`
+- **Aprofunda:** `bufio-scanner`, `erros-como-valores`, `os-args-e-flag`, `runes-e-utf8`, `table-driven-tests`
+- **Critérios de aceite:** `gofmt -l .` vazio; `go vet ./...` limpo; testes para arquivo vazio, sem newline final e UTF-8 (`-m` ≠ `-c` para "ação"); arquivos sempre fechados.
 - **Extensões:** `-L` (linha mais longa); comparar a saída com o `wc` real num script de teste.
-- **Ponte com TS:** não há `undefined`/`null` para tipos básicos, existem **zero values**. Erro não é exceção, é **valor de retorno**: `if err != nil` é o `try/catch` explícito. Letra maiúscula = `export`. `go.mod` ≈ `package.json`, mas sem `node_modules` e sem scripts.
+- **Ponte com TS:** `defer f.Close()` ≈ `finally`, mas ligado à função. Ler arquivo linha a linha sem carregar tudo na memória é o padrão, não a exceção.
 
 ---
 
@@ -48,6 +95,12 @@
 **Objetivo:** escrever programas Go de verdade com structs, métodos, coleções, JSON, erros bem tratados e testes.
 **Checkpoint de saída:** entrevista sobre ponteiro vs valor, slices (len/cap/append), mapas, wrapping de erros e por que interfaces de I/O são tão centrais.
 
+### Rampa
+- **R1.1 `json-ida-e-volta`:** serializar e desserializar uma struct aninhada, com tags, campos omitidos e campos desconhecidos (`encoding-json-e-struct-tags`)
+- **R1.2 `erros-em-camadas`:** três funções que embrulham erros; no topo, decidir com `errors.Is/As` (`wrapping-de-erros`, `errors-is-as`)
+- **R1.3 `ponteiro-ou-valor`:** o mesmo tipo com receivers de valor e de ponteiro; prever o que muda (`metodos-e-receivers`)
+- **Diagnóstico** → P01
+
 ### P01. tarefas: gerenciador de tarefas em CLI com persistência em JSON
 - **Por quê:** é um CRUD que você conhece de cor, o que libera a cabeça para focar **só** em como Go modela dados.
 - **Etapas:**
@@ -55,7 +108,8 @@
   2. Persistência em arquivo JSON (`~/.tarefas.json`), com escrita atômica (arquivo temporário + rename).
   3. Filtros (`--pendentes`, `--tag`), ordenação por prioridade/data, saída em tabela alinhada.
   4. Pacote interno `internal/store` com testes, incluindo `t.TempDir()` para os testes de arquivo.
-- **Conceitos introduzidos:** `structs`, `metodos-e-receivers`, `ponteiros`, `slices`, `maps`, `encoding-json-e-struct-tags`, `time-pacote`, `wrapping-de-erros`, `errors-is-as`, `erros-sentinela-e-tipados`, `layout-cmd-internal`, `table-driven-tests`, `defer`
+- **Conceitos introduzidos:** `metodos-e-receivers`, `slices-internals-len-cap`, `encoding-json-e-struct-tags`, `time-pacote`, `wrapping-de-erros`, `errors-is-as`, `erros-sentinela-e-tipados`, `layout-cmd-internal`, `escrita-atomica-de-arquivos`
+- **Aprofunda:** `structs-basico`, `ponteiros-basico`, `slices-basico`, `maps-basico`, `table-driven-tests`, `defer`
 - **Critérios de aceite:** nenhum erro ignorado (`_ =` só com justificativa); receivers consistentes; testes do store com cobertura ≥ 70%; erro amigável para JSON corrompido.
 - **Extensões:** `tarefas export --csv`; flag `--json` para saída legível por máquina.
 - **Ponte com TS:** struct ≠ class (sem herança, sem construtor; use a função `NewX` por convenção). **Armadilhas:** `append` pode ou não realocar (aliasing de slices); iterar mapa não tem ordem; JSON só serializa campos **exportados**. `errors.Is` ≈ `instanceof`, mas para cadeias de wrap.
@@ -68,14 +122,15 @@
   3. Formatos de saída plugáveis (texto, JSON, markdown) via interface `Reporter`.
   4. Benchmark do parser: medir alocações e otimizar (ex.: evitar `regexp` no hot path).
 - **Conceitos introduzidos:** `interfaces-implicitas`, `io-reader-writer`, `composicao-de-interfaces`, `strings-e-bytes-builder`, `pacote-slices-e-sort`, `closures-e-funcoes-de-primeira-classe`, `benchmarks-basico`, `type-assertion`
+- **Aprofunda:** `io-reader-intro`, `bufio-scanner`, `pacote-strings`
 - **Critérios de aceite:** processa um log de 1 GB com memória constante (`/usr/bin/time -v`); benchmark com `b.ReportAllocs()`; interfaces pequenas, definidas **no consumidor**.
 - **Extensões:** `--follow` (tail -f); histograma de latência no terminal.
 - **Ponte com TS:** interface em Go é **estrutural e implícita** (parecido com TS!), mas é checada em runtime para type assertions e não existe `implements`. Prefira interfaces de 1–2 métodos. `io.Reader` ≈ Node streams, porém síncrono e muito mais simples.
 
 ### Katas da fase
 - `rot13-reader`: implementar um `io.Reader` que embrulha outro (`io-reader-writer`)
-- `frequencia-palavras`: top-K palavras com `maps` + `slices.SortFunc`
-- `slice-aliasing`: prever e corrigir bugs de `append` compartilhando array (`slices`)
+- `frequencia-palavras`: top-K palavras com mapa + `slices.SortFunc` (`maps-basico`, `pacote-slices-e-sort`)
+- `slice-aliasing`: prever e corrigir bugs de `append` compartilhando array (`slices-internals-len-cap`)
 - `validar-cpf`: funções puras + table-driven tests (`table-driven-tests`)
 
 ---
@@ -85,6 +140,12 @@
 **Objetivo:** dominar o sistema de tipos (interfaces a fundo, embedding, generics, iterators) e saber **quando** usar cada coisa.
 **Checkpoint de saída:** explicar nil interface vs interface contendo nil, method sets, quando generics vale a pena, e desenhar uma API de pacote idiomática.
 
+### Rampa
+- **R2.1 `formas`:** `Forma` com `Area()`/`Perimetro()`, implementada por três tipos; somar áreas de uma `[]Forma` e identificar o tipo com type switch (`type-switch`, `method-sets`)
+- **R2.2 `dias-da-semana`:** enum com `iota` + `String()` + parse de string para o enum (`iota-e-enums`, `stringer-interface`)
+- **R2.3 `pilha-generica`:** `Stack[T]` com `Push/Pop/Peek` e testes para dois tipos (`generics-type-params`)
+- **Diagnóstico** → P03
+
 ### P03. calc: interpretador de uma linguagem de expressões
 - **Por quê:** lexer → parser → AST → avaliador é o projeto clássico para exercitar tipos, interfaces, type switch e erros ricos. Ele também prepara o terreno para o parser de protocolo do `minikv`.
 - **Etapas:**
@@ -93,7 +154,8 @@
   3. **Avaliador** com variáveis, funções embutidas (`max`, `sqrt`) e erros com posição (tipo de erro customizado).
   4. **REPL** interativo + pacote `calc` com API pública documentada (`go doc`) e exemplos testáveis (`Example...`).
   5. Utilitários genéricos próprios (`Stack[T]`, `Map/Filter`) e um **iterator** (`iter.Seq`) sobre os tokens.
-- **Conceitos introduzidos:** `iota-e-enums`, `stringer-interface`, `runes-e-utf8`, `type-switch`, `embedding`, `method-sets`, `nil-interface-gotcha`, `generics-type-params`, `generics-constraints`, `iterators-range-over-func`, `custom-error-types`, `godoc-e-example-tests`, `panic-recover`, `fuzzing-basico`
+- **Conceitos introduzidos:** `iota-e-enums`, `stringer-interface`, `type-switch`, `embedding`, `method-sets`, `nil-interface-gotcha`, `generics-type-params`, `generics-constraints`, `iterators-range-over-func`, `custom-error-types`, `godoc-e-example-tests`, `panic-recover`, `fuzzing-basico`
+- **Aprofunda:** `runes-e-utf8`, `interfaces-implicitas`, `erros-sentinela-e-tipados`, `closures-e-funcoes-de-primeira-classe`
 - **Critérios de aceite:** fuzz test do lexer/parser rodando ≥ 1 min sem panic; erros indicam linha/coluna; API pública mínima (o resto é não exportado); `Example` tests passando.
 - **Extensões:** `if`/funções definidas pelo usuário; compilar para bytecode e rodar numa VM de pilha.
 - **Ponte com TS:** não há union types: use interface + type switch (≈ discriminated union, sem exhaustiveness check). Generics em Go são bem mais limitados que em TS (sem conditional/mapped types) **de propósito**. `panic` não é `throw`: é para bug, não para fluxo de controle.
@@ -111,6 +173,12 @@
 **Objetivo:** pensar em goroutines e channels com segurança: cancelamento, backpressure, sem vazamentos e sem races.
 **Checkpoint de saída:** desenhar no quadro um worker pool com cancelamento; explicar race vs deadlock vs leak; quando usar channel vs mutex; o que o `context` propaga.
 
+### Rampa
+- **R3.1 `ping-pong`:** duas goroutines trocando mensagens por um channel N vezes e encerrando de forma limpa (`goroutines`, `channels`)
+- **R3.2 `contador-com-race`:** 1000 goroutines incrementando um contador; ver o race detector acusar e corrigir de duas formas, mutex e atomic (`race-detector`, `sync-mutex`)
+- **R3.3 `relogio`:** `select` com `time.Ticker`, timeout e cancelamento por `context` (`select`, `context-cancelamento-timeout`)
+- **Diagnóstico** → P04
+
 ### P04. linkcheck: verificador de links concorrente (crawler)
 - **Por quê:** I/O de rede em massa é o caso de uso perfeito para goroutines, e é fácil de "explodir" sem controle, o que torna os limites necessários.
 - **Etapas:**
@@ -120,6 +188,7 @@
   4. **Context**: timeout global e por request, cancelamento por Ctrl+C (`signal.NotifyContext`).
   5. Crawl recursivo até a profundidade N, sem visitar duas vezes (mapa protegido) e rate limit por host.
 - **Conceitos introduzidos:** `goroutines`, `channels`, `buffered-vs-unbuffered`, `select`, `sync-waitgroup`, `worker-pool`, `context-cancelamento-timeout`, `net-http-client`, `sync-mutex`, `race-detector`, `rate-limiting`, `goroutine-leak`
+- **Aprofunda:** `closures-e-funcoes-de-primeira-classe` (captura de variável em goroutines), `maps-basico` (mapas não são thread-safe), `wrapping-de-erros`
 - **Critérios de aceite:** `go test -race ./...` limpo; nenhuma goroutine viva após o fim (verificar com `runtime.NumGoroutine` em teste ou com `goleak`); Ctrl+C encerra em menos de 1 s; os testes usam `httptest.Server` (sem internet).
 - **Extensões:** relatório em JSON; respeitar `robots.txt`; retry com backoff exponencial + jitter.
 - **Ponte com TS:** esqueça o event loop: goroutines são **paralelas de verdade** e bloqueiam sem medo. Não existe `Promise.all`: você compõe com WaitGroup/channels/errgroup. **Armadilha:** em Node, um objeto compartilhado é seguro porque só existe uma thread. Em Go **não é**: race condition é real.
@@ -149,6 +218,12 @@
 **Objetivo:** construir uma API de produção com a stdlib: roteamento, middlewares, validação, logs estruturados, banco, migrations, testes de integração e container.
 **Checkpoint de saída:** explicar o ciclo de vida de um request em `net/http`, onde o `context` entra, como estruturar camadas sem "Java em Go" e como testar handlers e repositórios.
 
+### Rampa
+- **R4.1 `ola-http`:** servidor com duas rotas JSON (`GET /saude`, `POST /eco`) usando os padrões do `ServeMux` (`net-http-server`, `servemux-patterns`)
+- **R4.2 `middleware-de-log`:** um middleware que mede a duração e loga com `slog` (`http-handler-interface`, `middlewares`, `log-slog`)
+- **R4.3 `testar-handler`:** testar o R4.1 com `httptest` sem subir porta (`httptest`)
+- **Diagnóstico** → P06 (rampa curta antes do P07: **R4.4 `sql-cru`**, CRUD de uma tabela com `pgx` num Postgres em Docker, `database-sql-e-pgx`)
+
 ### P06. encurta (v1): API de encurtador de URLs só com a stdlib
 - **Por quê:** a stdlib de Go é suficiente para APIs sérias. Aprender sem framework mostra o que os frameworks escondem.
 - **Etapas:**
@@ -158,6 +233,7 @@
   4. Validação, erros de API padronizados (RFC 9457 problem+json) e configuração por env.
   5. Testes com `httptest` (handlers) + servidor com timeouts configurados e shutdown gracioso.
 - **Conceitos introduzidos:** `net-http-server`, `servemux-patterns`, `http-handler-interface`, `middlewares`, `log-slog`, `context-em-requests`, `injecao-de-dependencia-manual`, `interfaces-no-consumidor`, `httptest`, `configuracao-por-env`, `server-timeouts`, `jwt-auth`
+- **Aprofunda:** `encoding-json-e-struct-tags`, `custom-error-types`, `layout-cmd-internal`, `graceful-shutdown`, `context-cancelamento-timeout`
 - **Critérios de aceite:** timeouts de servidor definidos (`ReadHeaderTimeout` etc.); nenhum handler sem teste; logs em JSON com request id; `go vet` + `staticcheck` limpos.
 - **Extensões:** contagem de cliques; rate limit por API key; documentação OpenAPI.
 - **Ponte com TS:** `http.Handler` ≈ middleware do Express, mas tipado e compondo funções. **Armadilha:** não traga estruturas de NestJS (pastas `controllers/`, `services/` globais, DI container). Em Go, organize **por domínio** e mantenha o `main` explícito.
@@ -187,6 +263,12 @@
 **Objetivo:** construir e distribuir uma ferramenta de linha de comando nível open source, que conversa com Docker, Kubernetes e APIs.
 **Checkpoint de saída:** explicar como uma CLI Go é distribuída (cross-compile, release, versão embutida) e como se integra com APIs de infra.
 
+### Rampa
+- **R5.1 `cobra-ola`:** CLI com dois subcomandos e uma flag persistente (`cobra-cli`)
+- **R5.2 `versao-embutida`:** binário que imprime a versão injetada via `-ldflags` e um template embutido com `go:embed` (`ldflags-versao`, `go-embed`)
+- **R5.3 `rodar-comando`:** executar `git status` via `os/exec` com timeout e tratar o exit code (`os-exec`)
+- **Diagnóstico** → P08
+
 ### P08. devkit: canivete DevOps em CLI
 - **Por quê:** a maior parte do ecossistema cloud-native (Docker, Kubernetes, Terraform, gh) é CLI em Go. Este projeto te coloca nesse mundo.
 - **Etapas:**
@@ -212,6 +294,12 @@
 **Objetivo:** programar no nível de TCP, protocolos e concorrência de servidor: o tipo de código que existe dentro de Redis, NATS e etcd.
 **Checkpoint de saída:** explicar como seu servidor lida com 10k conexões, como a expiração de TTL funciona, o que acontece num crash (durabilidade) e o trade-off da replicação assíncrona.
 
+### Rampa
+- **R6.1 `eco-tcp`:** servidor TCP de eco com uma goroutine por conexão, testado com `nc` (`net-tcp-server`)
+- **R6.2 `deadline`:** derrubar conexões ociosas após N segundos (`deadlines-de-conexao`)
+- **R6.3 `protocolo-linha`:** um mini protocolo `CMD arg\r\n` com parser e respostas tipadas (`protocolo-binario-e-parsing`, `bufio-reader-writer-de-rede`)
+- **Diagnóstico** → P09
+
 ### P09. minikv: um mini Redis
 - **Por quê:** é um projeto de portfólio que impressiona em entrevistas e junta tudo: parser (fase 2), concorrência (fase 3) e arquitetura de servidor.
 - **Etapas:**
@@ -229,7 +317,7 @@
 ### Katas da fase
 - `resp-parser`: parse/serialize de RESP com fuzzing (`protocolo-binario-e-parsing`, `fuzzing-basico`)
 - `chat-tcp`: servidor de chat TCP com broadcast (`net-tcp-server`, `channels`)
-- `consistent-hashing`: anel de hash consistente com nós virtuais (`maps`, `pacote-slices-e-sort`)
+- `consistent-hashing`: anel de hash consistente com nós virtuais (`maps-basico`, `pacote-slices-e-sort`)
 
 ---
 
@@ -237,6 +325,12 @@
 
 **Objetivo:** decompor um sistema em serviços que se comunicam por gRPC e mensageria, com resiliência e observabilidade de produção.
 **Checkpoint de saída:** system design oral: "desenhe o encurtador para 10k req/s", cobrindo consistência, idempotência, outbox, tracing distribuído e falhas parciais.
+
+### Rampa
+- **R7.1 `grpc-ola`:** definir um `.proto`, gerar com `buf` e fazer chamada unária com deadline (`grpc-e-protobuf`)
+- **R7.2 `nats-ola`:** publisher e consumer com JetStream e ack manual (`mensageria-nats-kafka`)
+- **R7.3 `trace-local`:** instrumentar o R4.1 com OpenTelemetry e ver o trace no Jaeger (`opentelemetry-tracing`)
+- **Diagnóstico** → P10
 
 ### P10. encurta (v3): de monolito a microsserviços
 - **Por quê:** você só entende o custo de microsserviços partindo do monolito que **você mesmo** escreveu (P06/P07).
@@ -262,6 +356,11 @@
 
 **Objetivo:** medir antes de otimizar e entender o runtime (alocação, escape analysis, GC, scheduler) o bastante para tomar decisões com dados.
 **Checkpoint de saída:** ler um profile de CPU/heap e explicar a causa; explicar escape analysis, o GC tri-color concorrente, `GOGC`/`GOMEMLIMIT` e o modelo G-M-P.
+
+### Rampa
+- **R8.1 `concat-bench`:** comparar `+`, `fmt.Sprintf`, `strings.Builder` e `bytes.Buffer` com benchmarks e explicar os números (`benchmarks-basico`, `escape-analysis`)
+- **R8.2 `primeiro-pprof`:** gerar e ler um profile de CPU de um programa pequeno (`pprof`)
+- **Diagnóstico** → P11
 
 ### P11. Otimizar o `minikv`
 - **Por quê:** otimizar o seu próprio servidor sob carga real ensina mais do que qualquer artigo.
