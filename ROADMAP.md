@@ -55,6 +55,13 @@ Cada micro-projeto vive em `projetos/00-rampa/MNN-nome/` e passa por um `/review
 - **Conceitos introduzidos:** `for-unico-loop`, `switch`, `funcoes-multiplos-retornos`, `bufio-scanner`, `math-rand`
 - **Ponte com TS:** `for` é o único loop (faz o papel de `while` e `for...of`). `switch` não precisa de `break` (não "cai" para o próximo caso) e pode não ter expressão (vira um `if/else` encadeado).
 
+#### M03b. docs: documentando o que você já escreveu
+- **O quê:** sem código novo. Escrever a documentação dos pacotes de M01–M03 (`saudacao`, `conversao` e o do `adivinha`): package comments, doc comments de tudo que é exportado, e conferir o resultado com `go doc -all` e com o `pkgsite` rodando localmente. Fechar com um mini-guia pessoal de convenções em `projetos/00-rampa/M03b-docs/NOTAS.md`.
+- **Conceitos introduzidos:** `doc-comments`
+- **Cobre:** comentário colado na declaração e começando pelo nome (`Package x ...`, `Func ...`); documentar o que **não** sai da assinatura (comportamento em bordas, erros, unidades); sintaxe do Go 1.19+ (parágrafos, listas, blocos de código, links `[strings.TrimSpace]`, `Deprecated:`); `doc.go` para pacotes grandes; regras do `staticcheck`/`revive` sobre comentários.
+- **Ponte com TS:** ≈ JSDoc/TSDoc, mas **sem tags** (`@param`, `@returns` não existem): é prosa. A ferramenta (`go doc`, pkg.go.dev) extrai direto do código, sem gerador como o TypeDoc.
+- **A partir daqui:** doc comments voltam a ser critério de aceite em todo review. `godoc-e-example-tests` (Fase 2) aprofunda com exemplos executáveis.
+
 #### M04. boletim: estatísticas de notas
 - **O quê:** recebe notas por argumento ou stdin e mostra média, mediana, maior, menor e situação (aprovado, recuperação, reprovado). Lógica em funções puras, separadas do `main`.
 - **Conceitos introduzidos:** `slices-basico`, `range`, `funcoes-variadicas`, `testing-basico`
