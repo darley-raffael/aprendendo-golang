@@ -9,14 +9,14 @@
 | `toolchain-go` | 0 | 3 | 0 | 2026-11-13 | 2026-11-20 | M01 aprovado sem dicas |
 | `modules-e-go-mod` | 0 | 2 | 0 | 2026-11-13 | 2026-11-16 | M01: caminho do módulo só corrigido após review |
 | `pacotes-e-visibilidade` | 0 | 2 | 0 | 2026-11-13 | 2026-11-16 | checagem parcial: confundiu pacote x módulo; import sem caminho do módulo; esqueceu campo minúsculo; M01: doc comment só após 2 reviews |
-| `fmt-verbos` | 0 | 1 | 0 | 2026-11-13 | 2026-11-14 | M01 só usou Println; verbos ainda não aplicados (M02 aplica) |
-| `variaveis-e-zero-values` | 0 | 0 | 0 | - | - | |
-| `tipos-basicos` | 0 | 0 | 0 | - | - | |
-| `conversao-de-tipos-explicita` | 0 | 0 | 0 | - | - | |
-| `constantes` | 0 | 0 | 0 | - | - | |
-| `strconv` | 0 | 0 | 0 | - | - | |
-| `erros-como-valores` | 0 | 0 | 0 | - | - | |
-| `if-com-init` | 0 | 0 | 0 | - | - | |
+| `fmt-verbos` | 0 | 3 | 0 | 2026-11-16 | 2026-11-23 | M01 só usou Println; verbos ainda não aplicados (M02 aplica); M02: %.2f, %q e Fprintln aplicados |
+| `variaveis-e-zero-values` | 0 | 3 | 0 | 2026-11-16 | 2026-11-23 | M02: zero value no retorno de erro |
+| `tipos-basicos` | 0 | 3 | 0 | 2026-11-16 | 2026-11-23 | M02 aprovado |
+| `conversao-de-tipos-explicita` | 0 | 1 | 0 | 2026-11-16 | 2026-11-17 | M02 não exigiu T(v) na prática; revisar |
+| `constantes` | 0 | 3 | 0 | 2026-11-16 | 2026-11-23 | checagem: compila/não certo, não deu saídas nem o porquê (untyped const); M02: nomes de constantes enganosos (celsiusPorF, baseCalculo) |
+| `strconv` | 0 | 3 | 0 | 2026-11-16 | 2026-11-23 | M02 aprovado |
+| `erros-como-valores` | 0 | 2 | 0 | 2026-11-16 | 2026-11-19 | checagem: chamou retorno múltiplo de "tupla"; não citou zero value no erro; M02: precisou de dicas N1+N2 e 3 rodadas (erro genérico, checagem longe da chamada) |
+| `if-com-init` | 0 | 1 | 0 | 2026-11-16 | 2026-11-17 | não aplicado no M02; revisar |
 | `for-unico-loop` | 0 | 0 | 0 | - | - | |
 | `switch` | 0 | 0 | 0 | - | - | |
 | `funcoes-multiplos-retornos` | 0 | 0 | 0 | - | - | |
@@ -38,6 +38,7 @@
 | `os-open-e-arquivos` | 0 | 0 | 0 | - | - | |
 | `defer` | 0 | 0 | 0 | - | - | |
 | `io-reader-intro` | 0 | 0 | 0 | - | - | |
+| `doc-comments` | 0 | 0 | 0 | - | - | micro-projeto dedicado M03b (pedido do aluno em 2026-11-16) |
 | `metodos-e-receivers` | 1 | 0 | 0 | - | - | |
 | `slices-internals-len-cap` | 1 | 0 | 0 | - | - | |
 | `encoding-json-e-struct-tags` | 1 | 0 | 0 | - | - | |

@@ -18,3 +18,4 @@
 <!-- Padrões notados ao longo do tempo: pontos fortes, dificuldades recorrentes, hábitos de TS/Node que aparecem no código Go. -->
 - Atenção a hábitos de TS/Node que costumam aparecer: tratar erro como exceção, estruturas no estilo NestJS (DI container, pastas por camada), excesso de abstração/genéricos, assumir execução single-thread (races).
 - 2026-11-13 (M01): tende a responder perguntas pela metade (pula subitens) e a tratar doc comment como formalidade; código limpo e boa separação de responsabilidades desde o início. Pedir respostas a todos os subitens.
+- 2026-11-16 (M02): resposta parcial voltou a aparecer (checagem de constantes sem saídas/porquê). Tende a corrigir só a metade de um item com duas partes; ao apontar itens compostos, numerar as partes. Pede dica quando trava e aplica bem (N2 de erros foi aplicada certinho). Pediu para adiar doc comments → M03b.
