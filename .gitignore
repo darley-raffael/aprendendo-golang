@@ -27,3 +27,4 @@ vendor/
 # binários Go gerados por go build (sem extensão: listar por projeto)
 projetos/00-rampa/M01-ola/ola
 projetos/00-rampa/M02-conversor/conversor
+projetos/00-rampa/M03-adivinha/adivinha
